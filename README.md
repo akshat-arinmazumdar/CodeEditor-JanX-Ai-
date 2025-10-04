@@ -1,0 +1,1 @@
+Janx AI is a smart code editor that blends Discord-style collaboration with Google Colab’s power, using AI to assist coding in real-time, all built for reliability with Node.js, Python, and Docker. Demo frontend " https://akshat-arinmazumdar.github.io/CodeEditor-JanX-Ai-/ "
