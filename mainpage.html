@@ -1,0 +1,389 @@
+<!--
+  JanX Editor Landing Page Hero + Core Sections
+  Assumes Tailwind CSS is loaded (e.g., via CDN or build). 
+  If using custom gradients or fonts, extend tailwind.config.js with:
+  module.exports = {
+    theme: {
+      extend: {
+        colors: {
+          janx: {
+            light: '#5de6ff',
+            dark: '#7c3aed',
+          },
+        },
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+        },
+      },
+    },
+  };
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JanX Editor</title>
+  <script defer>
+    // simple hamburger toggle
+    function toggleMenu() {
+      const nav = document.getElementById('mobile-menu');
+      nav.classList.toggle('hidden');
+    }
+    function dismissBanner() {
+      document.getElementById('top-banner').classList.add('hidden');
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* dotted black background */
+    body {
+      background-color: #000000;
+      background-image: radial-gradient(#333333 1px, transparent 1px);
+      background-size: 20px 20px;
+      background-position: 0 0;
+    }
+    /* hero image */
+    .hero-image {
+      background-image: url('https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+<body class="text-gray-300 font-sans antialiased">
+  <!-- Top notification banner -->
+  <div id="top-banner" class="bg-[#1f2230] flex items-center justify-center text-sm py-1 px-4">
+    <div class="max-w-7xl w-full flex items-center gap-3">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center bg-cyan-500 text-black text-xs font-semibold px-2 py-1 rounded-full">New</span>
+        <span>Introduction to JanX Editor v2 can be run through the media browser.</span>
+      </div>
+      <div class="ml-auto">
+        <div onclick="dismissBanner()" aria-label="Dismiss" class="text-gray-400 hover:text-white">✕</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-30 bg-transparent backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between py-4">
+      <div class="flex items-center space-x-6">
+        <div class="text-white font-bold text-xl">JanX</div>
+        <nav class="hidden md:flex gap-6 text-sm">
+          <a href="#" class="hover:text-white">How it works</a>
+          <a href="#" class="hover:text-white">Case Study</a>
+          <a href="#" class="hover:text-white">Resources</a>
+          <a href="#" class="hover:text-white">Docs</a>
+          <a href="#" class="hover:text-white">Support</a>
+          <a href="#" class="hover:text-white">About</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="hidden md:inline-block text-sm px-5 py-2 rounded-full bg-gradient-to-r from-sky-400 to-purple-500 font-medium hover:brightness-105 transition">Try now — it's free</div>
+        <div class="md:hidden" aria-label="menu" onclick="toggleMenu()">
+          <svg width="24" height="24" fill="none" stroke="currentColor" class="text-gray-300"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </div>
+      </div>
+    </div>
+    <!-- mobile menu -->
+    <div id="mobile-menu" class="md:hidden px-6 pb-4 hidden">
+      <div class="flex flex-col gap-3 text-sm">
+        <a href="#" class="hover:text-white">How it works</a>
+        <a href="#" class="hover:text-white">Case Study</a>
+        <a href="#" class="hover:text-white">Resources</a>
+        <a href="#" class="hover:text-white">Docs</a>
+        <a href="#" class="hover:text-white">Support</a>
+        <a href="#" class="hover:text-white">About</a>
+        <div class="mt-2 text-sm px-4 py-2 rounded-full bg-gradient-to-r from-sky-400 to-purple-500 font-medium">Try now — it's free</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 py-24 flex flex-col lg:flex-row gap-16">
+      <!-- left headline -->
+      <div class="flex-1 flex flex-col justify-center">
+        <h1 class="font-extrabold text-[4.5rem] leading-[1.05] tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-purple-500">
+          Code. Editor. Deploy.
+        </h1>
+        <p class="max-w-xl text-lg mb-6">
+          Execute your code in multiple robust environments, support accuracy and collaboration, and make your source code accessible to users with one click.
+        </p>
+        <div class="flex gap-4">
+          <div class="rounded-full px-6 py-3 bg-gradient-to-r from-sky-400 to-purple-500 font-semibold hover:shadow-lg transition">
+            Get Started
+          </div>
+          <div class="rounded-full px-6 py-3 border border-gray-600 hover:bg-gray-800 transition">
+            Learn More
+          </div>
+        </div>
+      </div>
+      <!-- right info card -->
+      <div class="flex-1 flex justify-end">
+        <div class="w-full max-w-md bg-[#1f2230] rounded-2xl p-8 shadow-lg">
+          <h2 class="text-xl font-semibold mb-3">Upgrade your progress</h2>
+          <p class="text-sm mb-4">
+            Integrate code development processes to encourage collaboration and increase quality output.
+          </p>
+          <ul class="space-y-2 mb-6">
+            <li class="flex items-start gap-2">
+              <div class="mt-1 w-2 h-2 bg-cyan-400 rounded-full"></div>
+              <span class="text-sm">Documentation, Backup and Recovery</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <div class="mt-1 w-2 h-2 bg-cyan-400 rounded-full"></div>
+              <span class="text-sm">Easy Collaboration</span>
+            </li>
+          </ul>
+          <div class="flex items-center gap-2 w-full justify-center rounded-lg px-4 py-3 bg-[#0f172a] border border-cyan-500 hover:bg-[#131a38] font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 9l5 5 5-5M12 4v10"/>
+            </svg>
+            Import source code
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logos / trust bar -->
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-wrap items-center justify-center gap-8">
+      <!-- placeholder logos -->
+      <div class="opacity-60 hover:opacity-100 transition"><span class="text-xs">Logo1</span></div>
+      <div class="opacity-60 hover:opacity-100 transition"><span class="text-xs">Logo2</span></div>
+      <div class="opacity-60 hover:opacity-100 transition"><span class="text-xs">Logo3</span></div>
+      <div class="opacity-60 hover:opacity-100 transition"><span class="text-xs">Logo4</span></div>
+      <div class="opacity-60 hover:opacity-100 transition"><span class="text-xs">Logo5</span></div>
+    </div>
+  </section>
+
+  <!-- Feature / code showcase -->
+  <section class="bg-[#0f111a] py-20">
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <h3 class="text-3xl font-bold mb-4">Coding made easy</h3>
+        <p class="mb-6">
+          Harness the power of an online code editor in your browser. Write, test, collaborate, and deploy—all from one place with no setup.
+        </p>
+        <div class="rounded-full px-6 py-3 bg-gradient-to-r from-sky-400 to-purple-500 font-semibold hover:shadow-lg transition">
+          Try JanX Editor
+        </div>
+      </div>
+      <div class="relative">
+        <!-- simulated code screenshot -->
+        <div class="rounded-xl overflow-hidden shadow-2xl bg-[#0f172a]">
+          <div class="p-4 font-mono text-xs text-green-300 bg-[#0f111a]">JanX Editor - example code</div>
+          <pre class="p-6 text-sm overflow-x-auto">
+<span class="text-[#c5c8c6]">// sample JavaScript code</span>
+<span class="text-[#8be9fd]">const</span> <span class="text-[#f8f8f2]">greet</span> = <span class="text-[#50fa7b]">name</span> => {
+  <span class="text-[#ffb86c]">console</span>.<span class="text-[#ff79c6]">log</span>(<span class="text-[#f1fa8c]">`Hello, ${name}!`</span>);
+};
+<span class="text-[#8be9fd]">greet</span>(<span class="text-[#ffb86c]">'Developer'</span>);
+          </pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Colored feature panels -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-6 grid gap-16">
+      <!-- Blue panel -->
+      <div class="lg:flex lg:gap-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-2xl p-10 text-white">
+        <div class="flex-1 mb-6 lg:mb-0">
+          <h3 class="text-3xl font-bold mb-3">Flexible Code Editor for Windows</h3>
+          <p class="mb-4">
+            JanX Editor now available for Windows with full feature parity. Enjoy native performance and seamless Windows integration.
+          </p>
+          <div class="rounded-full px-6 py-3 bg-black bg-opacity-20 font-semibold hover:brightness-105 transition">
+            Download for Windows
+          </div>
+        </div>
+        <div class="flex-1">
+          <!-- windows editor image -->
+          <div class="rounded-xl overflow-hidden shadow-xl bg-[#0f172a] p-6">
+            <div class="text-sm mb-2">JanX on Windows</div>
+            <div class="h-48 hero-image rounded-md flex items-center justify-center">
+              <span class="text-xs bg-black bg-opacity-70 px-2 py-1 rounded">Windows Editor</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Green panel -->
+      <div class="lg:flex lg:gap-12 bg-green-500 rounded-2xl p-10 text-black">
+        <div class="flex-1 mb-6 lg:mb-0">
+          <h3 class="text-3xl font-bold mb-3">Real-time collaboration</h3>
+          <p class="mb-4">
+            JanX enhances collaboration with developers in real time via Git-like sync and live editing.
+          </p>
+          <div class="rounded-full px-6 py-3 bg-black bg-opacity-10 font-semibold hover:brightness-105 transition">
+            Learn More
+          </div>
+        </div>
+        <div class="flex-1">
+          <!-- small editor preview -->
+          <div class="rounded-xl overflow-hidden shadow-xl bg-[#0f172a] p-6">
+            <div class="text-sm mb-2">Live editing session</div>
+            <div class="h-48 bg-black rounded-md flex items-center justify-center">
+              <span class="text-xs opacity-50">Collab UI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deploy tagline -->
+  <section class="py-20">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-extrabold mb-4">Deploy anywhere, with JanX Editor</h2>
+      <div class="flex flex-wrap justify-center gap-6 mt-6">
+        <!-- example platform icons placeholders -->
+        <div class="px-4 py-2 bg-[#1f2230] rounded-lg text-sm">Docker</div>
+        <div class="px-4 py-2 bg-[#1f2230] rounded-lg text-sm">GitHub</div>
+        <div class="px-4 py-2 bg-[#1f2230] rounded-lg text-sm">Kubernetes</div>
+        <div class="px-4 py-2 bg-[#1f2230] rounded-lg text-sm">AWS</div>
+        <div class="px-4 py-2 bg-[#1f2230] rounded-lg text-sm">Vercel</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured developers -->
+  <section class="py-20 bg-[#0f111a]">
+    <div class="max-w-7xl mx-auto px-6 text-center mb-10">
+      <h3 class="text-3xl font-bold">Featured Developers.</h3>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 flex flex-wrap justify-center gap-8">
+      <!-- placeholder circles -->
+      <div class="w-24 h-24 rounded-full bg-[#1f2230] flex items-center justify-center">A</div>
+      <div class="w-24 h-24 rounded-full bg-[#1f2230] flex items-center justify-center">B</div>
+      <div class="w-24 h-24 rounded-full bg-[#1f2230] flex items-center justify-center">C</div>
+      <div class="w-24 h-24 rounded-full bg-[#1f2230] flex items-center justify-center">D</div>
+      <div class="w-24 h-24 rounded-full bg-[#1f2230] flex items-center justify-center">E</div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold">They tell me about the JanX Editor</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-[#1f2230] rounded-2xl p-6 shadow">
+          <p class="mb-4 text-sm">
+            “JanX Editor transformed how our team deploys prototypes—real-time sync and one-click rollouts are game changers.”
+          </p>
+          <div class="flex items-center gap-3 mt-2">
+            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-xs">JS</div>
+            <div>
+              <div class="text-sm font-semibold">Jane Doe</div>
+              <div class="text-xs text-gray-400">Lead Developer</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-[#1f2230] rounded-2xl p-6 shadow">
+          <p class="mb-4 text-sm">
+            “Seamless collaboration, zero setup, and consistent environments make JanX our default editor.”
+          </p>
+          <div class="flex items-center gap-3 mt-2">
+            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-xs">MB</div>
+            <div>
+              <div class="text-sm font-semibold">Mark Brown</div>
+              <div class="text-xs text-gray-400">Open Source Contributor</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-[#1f2230] rounded-2xl p-6 shadow">
+          <p class="mb-4 text-sm">
+            “Deploying from JanX feels like pushing to production with confidence—UI and feedback are crisp.”
+          </p>
+          <div class="flex items-center gap-3 mt-2">
+            <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-xs">AL</div>
+            <div>
+              <div class="text-sm font-semibold">Alex Lee</div>
+              <div class="text-xs text-gray-400">Full Stack Engineer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA with devices -->
+  <section class="py-24">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col lg:flex-row gap-16 items-center">
+      <div class="flex-1">
+        <h2 class="text-4xl font-extrabold mb-4">Every day the JanX Editor is always growing</h2>
+        <p class="mb-6">
+          Start coding with one click, no setup required. Sync across devices and share live sessions instantly.
+        </p>
+        <div class="rounded-full px-6 py-3 bg-gradient-to-r from-sky-400 to-purple-500 font-semibold hover:shadow-lg transition">
+          Try JanX Editor
+        </div>
+      </div>
+      <div class="flex-1 flex justify-center">
+        <!-- stacked device mockup placeholders -->
+        <div class="space-y-4">
+          <div class="w-full rounded-lg overflow-hidden shadow-2xl bg-[#0f172a] p-4">
+            <div class="text-sm mb-2">Desktop View</div>
+            <div class="h-36 bg-black rounded flex items-center justify-center text-xs opacity-50">Editor</div>
+          </div>
+          <div class="w-full rounded-lg overflow-hidden shadow-2xl bg-[#0f172a] p-4">
+            <div class="text-sm mb-2">Mobile View</div>
+            <div class="h-28 bg-black rounded flex items-center justify-center text-xs opacity-50">Editor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#0f111a] text-sm text-gray-400 py-16">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+      <div>
+        <div class="text-white font-bold text-xl mb-2">JanX Editor</div>
+        <p class="text-xs">Build, collaborate, deploy — all from one place.</p>
+        <div class="flex gap-3 mt-4">
+          <div class="w-8 h-8 rounded-full bg-[#1f2230] flex items-center justify-center">T</div>
+          <div class="w-8 h-8 rounded-full bg-[#1f2230] flex items-center justify-center">G</div>
+          <div class="w-8 h-8 rounded-full bg-[#1f2230] flex items-center justify-center">L</div>
+        </div>
+      </div>
+      <div>
+        <div class="font-semibold mb-2">Product</div>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white">Features</a></li>
+          <li><a href="#" class="hover:text-white">Pricing</a></li>
+          <li><a href="#" class="hover:text-white">Docs</a></li>
+          <li><a href="#" class="hover:text-white">API</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-semibold mb-2">Company</div>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white">About</a></li>
+          <li><a href="#" class="hover:text-white">Careers</a></li>
+          <li><a href="#" class="hover:text-white">Blog</a></li>
+          <li><a href="#" class="hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-semibold mb-2">Support</div>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white">Help Center</a></li>
+          <li><a href="#" class="hover:text-white">Terms</a></li>
+          <li><a href="#" class="hover:text-white">Privacy</a></li>
+          <li><a href="#" class="hover:text-white">Status</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-12 text-center text-xs">
+      © 2025 JanX Editor. All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>
