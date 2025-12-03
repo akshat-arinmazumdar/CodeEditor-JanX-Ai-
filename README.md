@@ -43,5 +43,9 @@ Janx AI is a smart code editor that blends Discord-style collaboration with Goog
 # CodeEditor-JanX-Ai-
 Ai base code editor.
 
-Demo frontend: https://akshat-arinmazumdar.github.io/CodeEditor-JanX-Ai-/
+Demo frontend: https://akshat-arinmazumdar.github.io/CodeEditor-Jan<img width="1895" height="870" alt="codeeditor1" src="https://github.com/user-attachments/assets/81958402-143e-4921-a2e3-8508894e78bd" />
+X-Ai-/
 >>>>>>> 72988c72bab2962624f3798e2865014446abe8e4
+<img width="1485" height="847" alt="codeeditor" src="https://github.com/user-attachments/assets/174d5ea4-f2d1-4e65-afcf-16d8c1631188" />
+
+
