@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JanX Editor - AI-Powered Code Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.38/build/spline-viewer.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Fira Code', monospace;
+            background-color: #0a0a0a;
+            color: #f5f5f5;
+            scroll-behavior: smooth;
+        }
+        
+        .navbar {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(74, 222, 128, 0.5);
+            box-shadow: 0 10px 25px rgba(74, 222, 128, 0.1);
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.4;
+        }
+        
+        .code-block {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .code-line {
+            display: flex;
+            padding: 2px 0;
+        }
+        
+        .line-number {
+            color: #6b7280;
+            padding: 0 15px;
+            user-select: none;
+        }
+        
+        .demo-cursor {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(135deg, #4ade80 0%, #3b82f6 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(74, 222, 128, 0.2);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background-color: rgba(74, 222, 128, 0.3);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .highlight:hover::after {
+            transform: scaleX(1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar fixed w-full z-50 py-4 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">JanX</span>
+                <span class="ml-2 text-xl font-medium">Editor</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#features" class="text-sm hover:text-green-400 transition">Features</a>
+                <a href="#about" class="text-sm hover:text-green-400 transition">About</a>
+                <a href="#demo" class="text-sm hover:text-green-400 transition">Demo</a>
+            </div>
+            <a href="registrationpage.html" target="_blank" rel="noopener noreferrer"><div class="btn-gradient text-sm px-6 py-2 rounded-full font-medium text-white">SIGN IN</div></a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+            <iframe src='https://my.spline.design/particleaibrain-k5n0DYvR6paW015Ibj4srxBY/' frameborder='0' width='100%' height='100%'></iframe>
+        </div>
+        <video autoplay muted loop class="hero-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-screen-with-programming-code-2269-large.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
+        <div class="text-center px-6 relative z-10">
+            <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-tight">JanX <span class="highlight">Editor</span></h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 opacity-90">The AI-powered code editor that understands your workflow</p>
+            <div class="flex justify-center space-x-4">
+                <div class="btn-gradient px-8 py-3 rounded-full font-medium text-white">Get Started</div>
+                <div class="border border-white/20 px-8 py-3 rounded-full font-medium hover:bg-white/10 transition">Learn More</div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
+            <a href="#features" class="text-white/60 hover:text-white transition">
+                <i class="fas fa-chevron-down text-xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Powerful <span class="highlight">Features</span></h2>
+                <p class="text-sm max-w-2xl mx-auto opacity-80">Designed for developers who demand both power and elegance</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card p-8 rounded-xl bg-black/20 hover:bg-black/40">
+                    <div class="w-12 h-12 rounded-lg bg-green-400/10 flex items-center justify-center mb-6">
+                        <i class="fas fa-brain text-green-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">AI Code Completion</h3>
+                    <p class="text-sm opacity-80">Context-aware suggestions that learn from your coding patterns to boost productivity.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card p-8 rounded-xl bg-black/20 hover:bg-black/40">
+                    <div class="w-12 h-12 rounded-lg bg-blue-400/10 flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Multi-Language Support</h3>
+                    <p class="text-sm opacity-80">Support for 50+ languages with syntax highlighting and language-specific tooling.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card p-8 rounded-xl bg-black/20 hover:bg-black/40">
+                    <div class="w-12 h-12 rounded-lg bg-purple-400/10 flex items-center justify-center mb-6">
+                        <i class="fas fa-bug text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Real-Time Linting</h3>
+                    <p class="text-sm opacity-80">Instant feedback on errors and warnings as you type, with intelligent fixes.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card p-8 rounded-xl bg-black/20 hover:bg-black/40">
+                    <div class="w-12 h-12 rounded-lg bg-yellow-400/10 flex items-center justify-center mb-6">
+                        <i class="fas fa-palette text-yellow-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Customizable Themes</h3>
+                    <p class="text-sm opacity-80">Choose from beautiful built-in themes or create your own perfect coding environment.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card p-8 rounded-xl bg-black/20 hover:bg-black/40">
+                    <div class="w-12 h-12 rounded-lg bg-red-400/10 flex items-center justify-center mb-6">
+                        <i class="fab fa-git-alt text-red-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Git Integration</h3>
+                    <p class="text-sm opacity-80">Seamless version control with visual diff tools and conflict resolution.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card p-8 rounded-xl bg-black/20 hover:bg-black/40">
+                    <div class="w-12 h-12 rounded-lg bg-pink-400/10 flex items-center justify-center mb-6">
+                        <i class="fas fa-bolt text-pink-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Performance Optimized</h3>
+                    <p class="text-sm opacity-80">Lightning fast even with large codebases, built with Rust for maximum efficiency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 lg:px-12 bg-black/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Redefining <span class="highlight">Code Editing</span></h2>
+                    <p class="text-sm opacity-90 mb-6">JanX Editor is built from the ground up to be the perfect companion for modern developers. We've combined the speed of native applications with the intelligence of AI to create an editor that anticipates your needs.</p>
+                    <p class="text-sm opacity-90 mb-6">Our mission is to remove the friction between thought and implementation, allowing you to focus on what matters most - creating exceptional software.</p>
+                    <div class="flex space-x-4">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 rounded-full bg-green-400 mr-2"></div>
+                            <span class="text-xs">AI-Assisted</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 rounded-full bg-blue-400 mr-2"></div>
+                            <span class="text-xs">Lightweight</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 rounded-full bg-purple-400 mr-2"></div>
+                            <span class="text-xs">Extensible</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-green-400 to-blue-500 rounded-xl opacity-20 blur"></div>
+                    <div class="relative bg-black rounded-xl p-1">
+                        <div class="bg-gray-900 rounded-lg overflow-hidden">
+                            <div class="flex items-center px-4 py-2 bg-gray-800">
+                                <div class="flex space-x-2 mr-4">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <div class="text-xs opacity-70">index.js - JanX Editor</div>
+                            </div>
+                            <div class="p-4 code-block">
+                                <pre class="text-xs font-mono">
+<span class="code-line"><span class="line-number">1</span> <span class="text-blue-400">import</span> React <span class="text-blue-400">from</span> <span class="text-green-400">'react'</span>;</span>
+<span class="code-line"><span class="line-number">2</span> <span class="text-blue-400">import</span> { render } <span class="text-blue-400">from</span> <span class="text-green-400">'react-dom'</span>;</span>
+<span class="code-line"><span class="line-number">3</span> </span>
+<span class="code-line"><span class="line-number">4</span> <span class="text-blue-400">function</span> <span class="text-yellow-300">App</span>() {</span>
+<span class="code-line"><span class="line-number">5</span>   <span class="text-blue-400">const</span> [count, setCount] = <span class="text-yellow-300">useState</span>(<span class="text-purple-400">0</span>);</span>
+<span class="code-line"><span class="line-number">6</span> </span>
+<span class="code-line"><span class="line-number">7</span>   <span class="text-blue-400">return</span> (</span>
+<span class="code-line"><span class="line-number">8</span>     <span class="text-gray-500">&lt;div className="app"&gt;</span></span>
+<span class="code-line"><span class="line-number">9</span>       <span class="text-gray-500">&lt;h1&gt;Counter: {count}&lt;/h1&gt;</span></span>
+<span class="code-line"><span class="line-number">10</span>       <span class="text-gray-500">&lt;div onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;</span></span>
+<span class="code-line"><span class="line-number">11</span>         Increment</span>
+<span class="code-line"><span class="line-number">12</span>       <span class="text-gray-500">&lt;/div&gt;</span></span>
+<span class="code-line"><span class="line-number">13</span>     <span class="text-gray-500">&lt;/div&gt;</span></span>
+<span class="code-line"><span class="line-number">14</span>   );</span>
+<span class="code-line"><span class="line-number">15</span> }</span>
+<span class="code-line"><span class="line-number">16</span> </span>
+<span class="code-line"><span class="line-number">17</span> <span class="text-yellow-300">render</span>(<span class="text-gray-500">&lt;App /&gt;</span>, <span class="text-yellow-300">document</span>.<span class="text-yellow-300">getElementById</span>(<span class="text-green-400">'root'</span>));</span>
+<span class="code-line"><span class="line-number">18</span> <span class="demo-cursor">|</span></span>
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="py-20 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Interactive <span class="highlight">Demo</span></h2>
+                <p class="text-sm max-w-2xl mx-auto opacity-80">Experience JanX Editor's capabilities with our live demo</p>
+            </div>
+            
+            <div class="bg-black/30 rounded-xl overflow-hidden border border-white/10">
+                <div class="flex items-center px-4 py-2 bg-gray-900">
+                    <div class="flex space-x-2 mr-4">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div class="text-xs opacity-70">demo.js - JanX Editor</div>
+                </div>
+                <div class="p-6">
+                    <div class="code-block">
+                        <pre class="text-xs font-mono" id="typing-demo">
+<span class="text-gray-500">// Try typing below to experience AI suggestions</span>
+                        </pre>
+                    </div>
+                    <div class="mt-6 flex items-center">
+                        <div class="flex-1 bg-gray-800 rounded-lg h-1">
+                            <div class="bg-gradient-to-r from-green-400 to-blue-500 h-1 rounded-lg w-3/4"></div>
+                        </div>
+                        <div class="ml-4 text-xs opacity-70">AI Processing: 75%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 px-6 lg:px-12 bg-gradient-to-br from-black/50 to-gray-900/50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-6">Ready to Transform Your <span class="highlight">Workflow</span>?</h2>
+            <p class="text-sm max-w-2xl mx-auto opacity-90 mb-10">Join thousands of developers who have already elevated their coding experience with JanX Editor.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <div class="border border-white/20 px-8 py-4 rounded-full font-medium hover:bg-white/10 transition">Sign in</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 lg:px-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500">JanX</span>
+                        <span class="ml-2 text-xl font-medium">Editor</span>
+                    </div>
+                    <p class="text-xs opacity-70">The intelligent code editor for the modern developer.</p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold mb-4">Product</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-xs opacity-70 hover:opacity-100 transition">Features</a></li>
+                        <li><a href="#" class="text-xs opacity-70 hover:opacity-100 transition">Pricing</a></li>
+                        <li><a href="#" class="text-xs opacity-70 hover:opacity-100 transition">Documentation</a></li>
+                        <li><a href="#" class="text-xs opacity-70 hover:opacity-100 transition">Releases</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-xs opacity-70 hover:opacity-100 transition">About</a></li>
+                        <li><a href="#" class="text-xs opacity-70 hover:opacity-100 transition">Careers</a></li>
+                        <li><a href="#" class="text-xs opacity-70 hover:opacity-100 transition">Privacy</a></li>
+                        <li><a href="#" class="text-xs opacity-70 hover:opacity-100 transition">Terms</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white/70 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white/70 hover:text-white transition"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-white/70 hover:text-white transition"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="text-white/70 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-12 pt-8 text-center">
+                <p class="text-xs opacity-50">© 2023 JanX Editor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Simple typing demo effect
+        const typingDemo = document.getElementById('typing-demo');
+        const codeLines = [
+            'function calculateTotal(items) {',
+            '  return items.reduce((total, item) => {',
+            '    const discount = item.onSale ? 0.2 : 0;',
+            '    return total + (item.price * (1 - discount));',
+            '  }, 0);',
+            '}',
+            '',
+            '// JanX suggests completions as you type',
+            'const cart = [',
+            '  { name: "Laptop", price: 999, onSale: false },',
+            '  { name: "Mouse", price: 25, onSale: true }',
+            '];',
+            '',
+            'const total = calculateTotal(cart);',
+            'console.log(`Total: $${total.toFixed(2)}`);'
+        ];
+
+        let currentLine = 0;
+        let currentChar = 0;
+        let isDeleting = false;
+        
+        function typeWriter() {
+            if (currentLine < codeLines.length) {
+                const line = codeLines[currentLine];
+                
+                if (!isDeleting) {
+                    if (currentChar <= line.length) {
+                        const typedText = line.substring(0, currentChar);
+                        if (currentLine === 0) {
+                            typingDemo.innerHTML = '<span class="text-gray-500">// Try typing below to experience AI suggestions</span><br>' + typedText + '<span class="demo-cursor">|</span>';
+                        } else {
+                            const previousLines = codeLines.slice(0, currentLine).join('<br>');
+                            typingDemo.innerHTML = '<span class="text-gray-500">// Try typing below to experience AI suggestions</span><br>' + previousLines + '<br>' + typedText + '<span class="demo-cursor">|</span>';
+                        }
+                        currentChar++;
+                        setTimeout(typeWriter, Math.random() * 100 + 50);
+                    } else {
+                        isDeleting = true;
+                        setTimeout(typeWriter, 1000);
+                    }
+                } else {
+                    if (currentChar >= 0) {
+                        const typedText = line.substring(0, currentChar);
+                        const previousLines = codeLines.slice(0, currentLine).join('<br>');
+                        typingDemo.innerHTML = '<span class="text-gray-500">// Try typing below to experience AI suggestions</span><br>' + previousLines + '<br>' + typedText + '<span class="demo-cursor">|</span>';
+                        currentChar--;
+                        setTimeout(typeWriter, 30);
+                    } else {
+                        isDeleting = false;
+                        currentLine++;
+                        setTimeout(typeWriter, 500);
+                    }
+                }
+            } else {
+                // Reset animation
+                currentLine = 0;
+                currentChar = 0;
+                isDeleting = false;
+                setTimeout(typeWriter, 1000);
+            }
+        }
+
+        // Start the typing effect after a delay
+        setTimeout(typeWriter, 2000);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

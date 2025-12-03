@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #111;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            100% { box-shadow: 0 0 10px 2px rgba(59, 130, 246, 0.4); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .form-container {
+            backdrop-filter: blur(8px);
+        }
+        
+        .input-glow:focus {
+            animation: glow 1.5s infinite alternate;
+        }
+        
+        .form-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .active-tab {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 font-['Inter']" style="font-family: 'Inter', sans-serif; background-color: #111;">
+    <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+        <iframe src='https://my.spline.design/particleaibrain-k5n0DYvR6paW015Ibj4srxBY/' frameborder='0' width='100%' height='100%'></iframe>
+    </div>
+    <div class="form-container bg-gray-800/20 rounded-xl shadow-2xl overflow-hidden w-full max-w-lg animate-fade-in border border-gray-700">
+        <div class="flex border-b border-gray-700">
+            <div id="signInTab" class="flex-1 py-4 px-6 text-center font-['Fira_Code'] font-bold text-white active-tab transition-all duration-300">
+                SIGN IN
+            </div>
+            <div id="signUpTab" class="flex-1 py-4 px-6 text-center font-['Fira_Code'] font-bold text-gray-400 hover:text-white transition-all duration-300">
+                SIGN UP
+            </div>
+        </div>
+        
+        <div class="p-8">
+            <!-- Sign In Form -->
+            <form id="signInForm" class="form-transition">
+                <div class="mb-6">
+                    <label for="signInEmail" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                    <input type="email" id="signInEmail" placeholder="Enter your email" class="w-full px-4 py-3 bg-gray-700/20 border border-gray-600 rounded-lg text-white placeholder-gray-400 input-glow focus:outline-none focus:border-blue-500 transition-all">
+                </div>
+                <div class="mb-6">
+                    <label for="signInPassword" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                    <input type="password" id="signInPassword" placeholder="Enter your password" class="w-full px-4 py-3 bg-gray-700/20 border border-gray-600 rounded-lg text-white placeholder-gray-400 input-glow focus:outline-none focus:border-blue-500 transition-all">
+                </div>
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <input id="rememberMe" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500">
+                        <label for="rememberMe" class="ml-2 text-sm text-gray-300">Remember me</label>
+                    </div>
+                    <a href="#" class="text-sm text-blue-400 hover:text-blue-300 transition-colors">Forgot password?</a>
+                </div>
+                <div type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                    Sign In
+                </div>
+            </form>
+            
+            <!-- Sign Up Form -->
+            <form id="signUpForm" class="form-transition hidden opacity-0 h-0 overflow-hidden">
+                <div class="mb-4">
+                    <label for="signUpName" class="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
+                    <input type="text" id="signUpName" placeholder="Enter your full name" class="w-full px-4 py-3 bg-gray-700/20 border border-gray-600 rounded-lg text-white placeholder-gray-400 input-glow focus:outline-none focus:border-blue-500 transition-all">
+                </div>
+                <div class="mb-4">
+                    <label for="signUpEmail" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                    <input type="email" id="signUpEmail" placeholder="Enter your email" class="w-full px-4 py-3 bg-gray-700/20 border border-gray-600 rounded-lg text-white placeholder-gray-400 input-glow focus:outline-none focus:border-blue-500 transition-all">
+                </div>
+                <div class="mb-4">
+                    <label for="signUpPassword" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                    <input type="password" id="signUpPassword" placeholder="Create a password" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 input-glow focus:outline-none focus:border-blue-500 transition-all">
+                </div>
+                <div class="mb-6">
+                    <label for="signUpConfirmPassword" class="block text-sm font-medium text-gray-300 mb-2">Confirm Password</label>
+                    <input type="password" id="signUpConfirmPassword" placeholder="Confirm your password" class="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 input-glow focus:outline-none focus:border-blue-500 transition-all">
+                </div>
+                <div class="flex items-center mb-6">
+                    <input id="termsAgreement" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500">
+                    <label for="termsAgreement" class="ml-2 text-sm text-gray-300">
+                        I agree to the <a href="#" class="text-blue-400 hover:text-blue-300 transition-colors">Terms of Service</a> and <a href="#" class="text-blue-400 hover:text-blue-300 transition-colors">Privacy Policy</a>
+                    </label>
+                </div>
+                <div type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                    Create Account
+                </div>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-400">
+                    Or continue with
+                </p>
+                <div class="flex justify-center space-x-4 mt-4">
+                    <div class="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-full transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-github" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+                          </svg>
+                    </div>
+                    <div class="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-full transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="maroon" class="bi bi-google" viewBox="0 0 16 16">
+                            <path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z"/>
+                          </svg>
+                    </div>
+                    <div class="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-full transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-linkedin" viewBox="0 0 16 16">
+                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+                          </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const signInTab = document.getElementById('signInTab');
+            const signUpTab = document.getElementById('signUpTab');
+            const signInForm = document.getElementById('signInForm');
+            const signUpForm = document.getElementById('signUpForm');
+            
+            // Switch to Sign Up form
+            signUpTab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update tab styles
+                signInTab.classList.remove('active-tab', 'text-white');
+                signInTab.classList.add('text-gray-400');
+                signUpTab.classList.add('active-tab', 'text-white');
+                signUpTab.classList.remove('text-gray-400');
+                
+                // Animate forms
+                signInForm.classList.add('hidden');
+                signInForm.classList.remove('opacity-100');
+                signUpForm.classList.remove('hidden', 'h-0');
+                setTimeout(() => {
+                    signUpForm.classList.add('opacity-100', 'h-auto');
+                }, 10);
+            });
+            
+            // Switch to Sign In form
+            signInTab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update tab styles
+                signUpTab.classList.remove('active-tab', 'text-white');
+                signUpTab.classList.add('text-gray-400');
+                signInTab.classList.add('active-tab', 'text-white');
+                signInTab.classList.remove('text-gray-400');
+                
+                // Animate forms
+                signUpForm.classList.add('hidden');
+                signUpForm.classList.remove('opacity-100');
+                signInForm.classList.remove('hidden', 'h-0');
+                setTimeout(() => {
+                    signInForm.classList.add('opacity-100', 'h-auto');
+                }, 10);
+            });
+            
+            // Form submissions
+            signInForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Sign In form submitted!');
+                // Add your sign in logic here
+            });
+            
+            signUpForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Sign Up form submitted!');
+                // Add your sign up logic here
+            });
+        });
+    </script>
+</body>
+</html>
